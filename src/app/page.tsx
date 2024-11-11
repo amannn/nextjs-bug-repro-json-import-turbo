@@ -1,7 +1,14 @@
-export default function Home() {
+export default async function Home() {
+  // ✅ Doesn't trigger error
+  const val = await Promise.resolve('foo');
+
+  // ❌ Triggers error
+  const messages = (await import('./messages.json')).default;
+
   return (
     <main>
-      <div>Hello world!</div>
+      <p>{val}</p>
+      <p>{messages.title}</p>
     </main>
   );
 }
